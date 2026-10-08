@@ -1,0 +1,93 @@
+import './App.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Layout from './layouts/Layout';
+import ArticlePage from './pages/LandingPages/ArticlePage';
+import HomePage from './pages/LandingPages/HomePage';
+import AboutPage from './pages/LandingPages/AboutPage';
+import ProjectListPage from './pages/LandingPages/ProjectListPage';import ContactPage from './pages/LandingPages/ContactPage';import NotFoundPage from './pages/NotFoundPage';
+import AuthLayout from './layouts/AuthLayout';
+import { SignInPage }from './pages/AuthPages/SignInPage';
+import SignUpPage from './pages/AuthPages/SignUpPage';
+import {DashboardPage} from './pages/DashboardPages/DashboardPage';
+import {ReportsPage} from './pages/DashboardPages/ReportsPage';
+import {UsersPage} from './pages/DashboardPages/UsersPage';
+import {DashArticleListPage} from './pages/DashboardPages/DashArticleListPage';
+import DashLayout from './layouts/DashLayout';
+
+const routes = [
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <NotFoundPage />,
+    children: [
+      {
+        path: '',
+        element: <HomePage />,
+      },
+      {
+        path: 'about',
+        element: <AboutPage />,
+      },
+      {
+        path: 'projects',
+        element: <ProjectListPage />,
+      },
+      {
+        path: 'contact',
+        element: <ContactPage />,
+      },
+      {
+        path: '/articles/:name',
+        element: <ArticlePage />,
+      },
+    ],
+  },
+  {
+    path: "auth",
+    element: <AuthLayout />,
+    errorElement: <NotFoundPage />,
+    children: [
+      {
+        path: "signin",
+        element: <SignInPage />,
+      },
+      {
+        path: "signup",
+        element: <SignUpPage />,
+      }
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <DashLayout />,
+    errorElement: <NotFoundPage />,
+    children: [
+      {
+        path: "",
+        element: <DashboardPage />,
+      },
+      {
+        path: "reports",
+        element: <ReportsPage />,
+      },
+      {
+        path: "users",
+        element: <UsersPage />,
+      },
+      {
+        path: "articles",
+        element: <DashArticleListPage />,
+      }
+    ],
+  },
+];
+
+const router = createBrowserRouter(routes);
+
+function App() {
+  return (
+    <RouterProvider router={router} />
+  );
+}
+
+export default App;
